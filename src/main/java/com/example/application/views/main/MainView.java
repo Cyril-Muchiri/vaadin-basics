@@ -9,26 +9,30 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
-@Route("my-app") 
-public class MainView extends VerticalLayout { 
+@Route("my-app")
+public class MainView extends VerticalLayout {
 
-  public MainView() {
-    VerticalLayout todosList = new VerticalLayout(); 
-    TextField taskField = new TextField(); 
-    Button addButton = new Button("Add"); 
-    addButton.addClickListener(click -> { 
-      Checkbox checkbox = new Checkbox(taskField.getValue());
-      todosList.add(checkbox);
-    });
-    addButton.addClickShortcut(Key.ENTER); 
+    public MainView() {
+        VerticalLayout todosList = new VerticalLayout();
+        TextField taskField = new TextField();
+        Button addButton = new Button("Add");
+        addButton.addClickListener(click -> {
+            Checkbox checkbox = new Checkbox(taskField.getValue());
+            todosList.add(checkbox);
+        });
+        addButton.addClickShortcut(Key.ENTER);
 
-    add( 
-      new H1("Vaadin Todo"),
-      todosList,
-      new HorizontalLayout(
-        taskField,
-        addButton
-      )
-    );
-  }
+        Button clearButton = new Button("Delete");
+        clearButton.addClickListener(click ->{
+            taskField.clear();
+        });
+        
+
+        add(
+                new H1("Vaadin Todo"),
+                todosList,
+                new HorizontalLayout(
+                        taskField,
+                        addButton,clearButton));
+    }
 }
